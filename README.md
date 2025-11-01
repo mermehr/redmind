@@ -6,7 +6,7 @@ This isn’t a CTF trophy shelf. It’s a growing record of adaptability, break-
 
 ## What’s Inside
 - **Binaries** – Legacy-compatible, rebuilt tools for old systems. If something refused to run on a 2012 box, I'll make it behave.
-- **Box Reports** – HTB and lab machines. Each entry contains enumeration notes, exploit chains, privilege escalation, and cleanup steps.
+- **Reports** – HTB and lab machines. Each entry contains enumeration notes, exploit chains, and privilege escalation steps.
 - **Playbooks** – Condensed tactical procedures for things I want muscle memory on (Shadow Creds, ADCS relay, pivot chains, etc). These are field notes, not tutorials.
 - **Scripts** – Small tools and helpers I wrote myself. Imperfect, but mine. Everything here actually came from problem-solving, and necessity.
 - **Write-Ups** – Long-form pieces where I break something down cleanly, usually after I’ve had enough distance to explain it properly.

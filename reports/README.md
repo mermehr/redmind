@@ -1,10 +1,10 @@
-# Box Reports
+# Reports
 
 This directory contains some technical summaries from individual machine engagements and assessment challenges. 
 
 Each report is derived from my detailed notes and full engagement documentation but focuses on key technical points, methodologies, and outcomes.
 
-These reports include:
+These reports may include:
 - **Hack The Box** machines
 - **Academy end-of-chapter assessments**
 - **Skill challenges**
