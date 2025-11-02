@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 # Script I made for auto-syncing my non-versioning repos.
-# Note:
-# It doesn't get on well with cron and SSH.
 
 set -euo pipefail
 
 eval $(/usr/bin/keychain --quiet --eval id_ed25519)
-# Put your real git URLs here (SSH recommended)
+# Put real git URLs here
 SCRIPTS_DIR="$HOME/path-scripts"                     # <-- change local repo path
 DOCS_DIR="$HOME/path-docs"                           # <-- change local repo path
 SCRIPTS_URL="git@github.com:user/path-scripts.git"   # <-- change to git repo

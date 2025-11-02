@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Usage: sudo ./recon_fixed.sh <TARGET_IP_or_CIDR> [DOMAIN] [DC_IP]
-# Example: sudo ./recon_fixed.sh 10.10.0.55 domain.local 10.10.0.53
+# Usage: sudo ./recon.sh <TARGET_IP_or_CIDR> [DOMAIN] [DC_IP]
+# Example: sudo ./recon.sh 10.10.0.55 domain.local 10.10.0.53
 set -euo pipefail
 IFS=$'\n\t'
 
