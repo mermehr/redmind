@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 # Python replacement script for netcat
 
-import argparse, socket, shlex, subprocess, sys, textwrap, threading
+import argparse
+import socket
+import shlex
+import subprocess
+import sys
+import textwrap
+import threading
 
 # Subprocess module function for process creation
 def execute(cmd):
@@ -54,7 +60,6 @@ class NetCat:
             print('User terminated')
             self.socket.close()
             sys.exit()
-
 
     # Initialize the listener
     def listen(self):
