@@ -1,10 +1,3 @@
----
-title: "Sudo Session Hunting"
-tags: [linux, forensics, privilege-escalation, sudo]
-author: "RedMind"
-date: 2025-10-01
----
-
 # Sudo - Session Hunting
 
 **TL;DR**  
@@ -56,7 +49,6 @@ ps -ef | egrep "(sudo|root|sshd|bash|zsh|sh)" | less
 ps -o pid,ppid,user,cmd -ax | awk '$4 ~ /sudo/ {print}'
 ```
 
-
 ### 2) System authentication logs
 
 - Debian/Ubuntu:
@@ -77,7 +69,6 @@ sudo grep --line-number 'sudo' /var/log/secure* | tail -n 200
 sudo grep 'username' /var/log/auth.log* /var/log/secure* 2>/dev/null | tail -n 200
 ```
 
-
 ### 3) Journalctl & audit (systemd)
 
 - Show recent sudo events in system journal:
@@ -91,7 +82,6 @@ sudo journalctl -k | egrep -i 'sudo|authentication' | tail -n 200
 ```bash
 sudo ausearch -m USER_CMD -i -ts recent  # requires audit binary
 ```
-
 
 ### 4) Shell history investigation
 
@@ -110,7 +100,6 @@ grep -i 'sudo\|su' /home/*/.zhistory 2>/dev/null || true
 
 > Tip: check timestamps (if preserved) and compare across users.
 
-
 ### 5) SUID/Capable binaries & cron
 
 - Find SUID files (fast scan):
@@ -125,7 +114,6 @@ sudo find / -perm -4000 -type f -print 2>/dev/null
 sudo ls -la /etc/cron.* /var/spool/cron /etc/systemd/system 2>/dev/null
 sudo grep -R --line-number "wget\|curl\|nc\|bash -c" /etc/cron* /etc/systemd/system 2>/dev/null | head
 ```
-
 
 ### 6) Recent logins & sessions
 
@@ -159,4 +147,3 @@ ss -tunap | egrep 'ESTAB|LISTEN' | head -n 40
 ## Follow-ups
 
 - Triaging specific suspicious commands from history; pivot to enumerating file permissions for binaries found; check for network-based persistence mechanisms.
-

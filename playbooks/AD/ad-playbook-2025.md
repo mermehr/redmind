@@ -1,11 +1,3 @@
----
-title: "AD Enumeration & Attacks — Playbook"
-tags: [Active-Directory, Red-Team, Enumeration, Kerberos, BloodHound]
-tools: [nmap, masscan, enum4linux-ng, ldapdomaindump, impacket, crackmapexec, kerbrute, bloodhound, SharpHound, hashcat, john]
-author: "RedMind"
-date: 2025-10-22
----
-
 # AD Enumeration & Attacks
 
 A compact, practical, start→finish playbook for Active Directory enumeration and attacks tuned for **Arch / BlackArch** environments.
@@ -13,6 +5,7 @@ A compact, practical, start→finish playbook for Active Directory enumeration a
 ---
 
 ## Table of contents
+
 1. Discovery
 2. SMB / LDAP / DNS enumeration
 3. User & group enumeration
@@ -44,7 +37,7 @@ sudo nmap -sS -Pn -p 53,88,135,139,389,445,464,636,3268,3389,5985 \
   -sC -sV -oA dc_ports 10.10.10.0/24
 ```
 
-*   88 = \[Kerberos\] 389/636 = \[LDAP\] 445 = SMB \[3268\] = Global Catalog \[464\] = Kerberos pw change \[3389\] = RDP \[5985/5986\] = WinRM.
+* 88 = \[Kerberos\] 389/636 = \[LDAP\] 445 = SMB \[3268\] = Global Catalog \[464\] = Kerberos pw change \[3389\] = RDP \[5985/5986\] = WinRM.
 
 * * *
 
@@ -107,8 +100,8 @@ netexec ldap DC_IP -u 'DOMAIN\\user' -p 'Passw0rd' --users
 
 Notes:
 
-*   Use validation to reduce false-positives before brute-force or large Kerberos requests.
-*   Rate limit attempts to avoid lockouts when practicing password spraying.
+* Use validation to reduce false-positives before brute-force or large Kerberos requests.
+* Rate limit attempts to avoid lockouts when practicing password spraying.
 
 * * *
 
@@ -140,8 +133,8 @@ Crack with `hashcat` (mode often 13100 for RC4/older; check current modes).
 
 Notes:
 
-*   Impacket tools change; update impacket if tools fail.
-*   AS-REP has high ROI when target accounts have preauth disabled.
+* Impacket tools change; update impacket if tools fail.
+* AS-REP has high ROI when target accounts have preauth disabled.
 
 * * *
 
@@ -149,8 +142,8 @@ Notes:
 
 Collector options:
 
-*   SharpHound (C#) — most complete.
-*   bloodhound-python — Python collector.
+* SharpHound (C#) — most complete.
+* bloodhound-python — Python collector.
 
 SharpHound usage (from a Windows host where you can execute):
 
@@ -177,14 +170,14 @@ MATCH p1=shortestPath((u1:User)-[r1:MemberOf*1..]->(g1:Group)) MATCH p2=(u1)-[:S
 
 BloodHound queries to run:
 
-*   Shortest Paths to Domain Admins
-*   Find Principals with Unconstrained Delegation
-*   Find Principals with Writeable ACLs
-*   Find Kerberoastable users
+* Shortest Paths to Domain Admins
+* Find Principals with Unconstrained Delegation
+* Find Principals with Writeable ACLs
+* Find Kerberoastable users
 
 Interpretation:
 
-*   Prioritize low-effort shortcuts: unconstrained delegation, ACL write paths, Kerberoastable accounts.
+* Prioritize low-effort shortcuts: unconstrained delegation, ACL write paths, Kerberoastable accounts.
 
 * * *
 
@@ -219,8 +212,8 @@ evil-winrm -i TARGET -u 'user' -p 'Pass'
 
 Notes:
 
-*   Use `--exec-method` in CME to try different exec paths (smbexec, wmiexec, psexec, etc.).
-*   For stealth, prefer methods that do not leave persistent artifacts on disk (e.g., wmiexec).
+* Use `--exec-method` in CME to try different exec paths (smbexec, wmiexec, psexec, etc.).
+* For stealth, prefer methods that do not leave persistent artifacts on disk (e.g., wmiexec).
 
 * * *
 
@@ -239,7 +232,7 @@ secretsdump.py example.local/flank:P@ssword@10.10.10.161 > hashes.out
 
 NTDS.dit extraction (requires SYSTEM and file access):
 
-*   Dump NTDS and SYSTEM hives, then use `secretsdump.py`/`ntdsutil` conversions.
+* Dump NTDS and SYSTEM hives, then use `secretsdump.py`/`ntdsutil` conversions.
 
 Elevate and dump hashes:
 
@@ -257,16 +250,16 @@ lsadump::dcsync /domain:DOMAIN.LOCAL /user:DOMAIN\administrator
 
 Housekeeping:
 
-*   Remove uploaded collectors and tools (SharpHound, chisel, mimikatz if used).
-*   Remove scheduled tasks or services created.
-*   Keep a `postop.log` with exact commands and timestamps.
+* Remove uploaded collectors and tools (SharpHound, chisel, mimikatz if used).
+* Remove scheduled tasks or services created.
+* Keep a `postop.log` with exact commands and timestamps.
 
 Detection signals:
 
-*   High-rate LDAP queries / unusual filters.
-*   Elevated Kerberos request patterns (many AS/TGS requests).
-*   SharpHound collection and zip exfil.
-*   DCSync RPC calls.
+* High-rate LDAP queries / unusual filters.
+* Elevated Kerberos request patterns (many AS/TGS requests).
+* SharpHound collection and zip exfil.
+* DCSync RPC calls.
 
 * * *
 
@@ -274,10 +267,10 @@ Detection signals:
 
 ### Hash cracking
 
-*   AS-REP:  mode `18200`
-*   Kerberoast: mode `13100`
-*   NTLM: mode `1000`
-*   NTLMv2: mode `5600`
+* AS-REP:  mode `18200`
+* Kerberoast: mode `13100`
+* NTLM: mode `1000`
+* NTLMv2: mode `5600`
 
 Example:
 

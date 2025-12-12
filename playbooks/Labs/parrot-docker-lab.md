@@ -1,10 +1,3 @@
----
-title: "Parrot Docker Lab Environment"
-tags: [lab-setup, docker, parrot, environment]
-author: "RedMind"
-date: 2025-10-01
----
-
 # Parrot Lab (Docker)
 
 A minimal, no-bullshit Parrot Security workstation running in Docker with GUI apps, host networking, and a persistent home. No VM drama, full CPU, reverse shells.

@@ -1,10 +1,3 @@
----
-title: "VM Isolation Breach (VM Escape/Side‑Channel)"
-tags: [virtualization, kvm, qemu, esxi, xen, spectre-bti, vm-escape, incident-response, hardening]
-author: "RedMind"
-date: 2025-10-01
----
-
 # VM Isolation Breach (VM Escape/Side‑Channel)
 
 **TL;DR**  
@@ -15,6 +8,7 @@ When you suspect a guest‑to‑host escape or cross‑VM data exfiltration (e.g
 ---
 
 ## Goals
+
 - Contain possible guest‑to‑host (or cross‑VM) impact.  
 - Verify and enforce CPU + hypervisor mitigations (Spectre‑class, device emulation).  
 - Patch hypervisor stack; rotate sensitive credentials/keys possibly exposed.  
@@ -23,6 +17,7 @@ When you suspect a guest‑to‑host escape or cross‑VM data exfiltration (e.g
 ---
 
 ## Immediate Actions (All Platforms)
+
 1. **Quarantine the suspect VM(s)**
    - Pause/suspend or snapshot **without powering down** if you need memory artifacts; otherwise **shutdown** to stop further leakage.
    - Block east‑west traffic between guests on the same host. Remove shared PCI devices where feasible.
@@ -38,25 +33,31 @@ When you suspect a guest‑to‑host escape or cross‑VM data exfiltration (e.g
 ---
 
 ## Verify Mitigation Status (Linux/KVM/QEMU)
+
 - Check CPU vuln/mits:
+
 ```bash
 cat /sys/devices/system/cpu/vulnerabilities/*
 dmesg | egrep -i 'spectre|retbleed|ibrs|ibpb|mitigation'
 ```
+
 - Ensure Spectre v2/BTI mitigations are active (kernel cmdline often includes `spectre_v2=on` or `mitigations=auto`/`auto,nosmt` on older distros).  
 - For KVM guests: enforce **IBPB on VMEXIT** and related barriers via current kernels; update to a kernel/QEMU pair that implements recommended defaults.
 
 ### Patch & Configuration
+
 ```bash
 # host
 apt/yum update && reboot  # apply latest kernel, microcode, qemu-kvm
 qemu-system-x86_64 --version
 modinfo kvm
 ```
+
 - Update **microcode** packages (Intel/AMD), **QEMU**, **libvirt**, and host kernel.  
 - Regenerate guest XMLs (libvirt) to remove legacy device models (e.g., FDC, obsolete NICs) and enforce **virtio**‑only where safe.
 
 ### Hardening
+
 - Disable unused emulated devices (floppy, IDE, legacy VGA paths).  
 - Prefer **paravirtual** drivers (virtio) with current QEMU.  
 - Use **vhost‑net offload** cautiously when threat model includes guest‑to‑host attack surface.  
@@ -66,11 +67,13 @@ modinfo kvm
 ---
 
 ## VMware ESXi
+
 - **Apply current VMSA patches** on ESXi/Workstation/Fusion.  
 - Verify EVC/microcode+IBRS/IBPB mitigations are applied per CPU family.  
 - Limit co‑tenancy of untrusted workloads; restrict passthrough devices that expand attack surface.
 
 ### Checks
+
 - Baseline: host build number, patch level, microcode revision.  
 - Review logs for VMX exceptions and device emulation errors near the incident window.  
 - Disable legacy virtual hardware where feasible; prefer modern virtual hardware versions.
@@ -78,6 +81,7 @@ modinfo kvm
 ---
 
 ## Xen / Citrix Hypervisor
+
 - Patch to latest advisory build for guest‑to‑host isolation issues.  
 - Review CPU feature flags; enforce branch‑predictor flushing between domains if supported.  
 - Reduce shared‑resource exposure: disallow PCI passthrough to untrusted guests; isolate dom0 services.
@@ -85,6 +89,7 @@ modinfo kvm
 ---
 
 ## Forensics & Telemetry (Reality Check)
+
 - **Spectre‑class attacks** typically leave minimal logs. Favor **configuration state + time alignment** over signature hunting.  
 - Collect: hypervisor and host kernel logs, perf counters (if configured), QEMU stderr (if daemonized with logging), EDR/AV telemetry on hosts.  
 - If you must memory‑dump: prioritize hypervisor userland (e.g., `qemu-system-*`) and management daemons.
@@ -92,6 +97,7 @@ modinfo kvm
 ---
 
 ## Secret & Credential Rotation
+
 - Rotate:
   - Hypervisor/root management creds and API tokens.  
   - Disk/LUKS keys for host‑side encrypted volumes.  
@@ -102,17 +108,21 @@ modinfo kvm
 ---
 
 ## Validation & Regression
+
 - Reboot hosts with updated kernel/microcode; confirm mitigations:  
+
 ```bash
 dmesg | egrep -i 'spectre|ibpb|ibrs|eibrs'
 cat /sys/devices/system/cpu/vulnerabilities/*
 ```
+
 - Launch a **canary VM** and run a benign stress suite; validate performance impact and stability.  
 - Run a curated lab harness to ensure VMEXIT/IBPB behavior is enforced (vendor tools or PoCs in a **closed** lab only).
 
 ---
 
 ## Preventive Architecture
+
 - **Host classing**: separate untrusted/lab VMs from critical infra.  
 - **Disable SMT** for high‑risk multi‑tenant hosts or enforce strong core isolation.  
 - **Minimal device surface**: no legacy emulation; prefer virtio; avoid passthrough to untrusted tenants.  
@@ -122,7 +132,7 @@ cat /sys/devices/system/cpu/vulnerabilities/*
 ---
 
 ## After‑Action
+
 - Document timeline, versions, and mitigations applied.  
 - Build a **playbook** for repeated checks during new disclosures (CPU, hypervisor, device emulation).  
 - Schedule purple‑team exercises targeting VM isolation assumptions (lab‑only; never on prod tenants).
-

