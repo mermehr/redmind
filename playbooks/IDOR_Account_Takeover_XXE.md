@@ -4,7 +4,7 @@
 
 * * *
 
-#### **Phase One: Recon & IDOR (The Entry)**
+## **Phase One: Recon & IDOR (The Entry)**
 
 _Trace the API signals to find hidden users._
 
@@ -25,7 +25,7 @@ _Trace the API signals to find hidden users._
 
 * * *
 
-#### **Phase Two: Account Takeover (The Bypass)**
+## **Phase Two: Account Takeover (The Bypass)**
 
 _Logic: We have the ID (52), now we need the keys (Token + Password). Connection blocked via POST? Try the side door (GET)._
 
@@ -52,7 +52,7 @@ _Logic: We have the ID (52), now we need the keys (Token + Password). Connection
 
 * * *
 
-#### **Phase Three: Execution (XXE Injection)**
+## **Phase Three: Execution (XXE Injection)**
 
 _Use Admin access to find a feature that parses XML, then force it to read a local PHP file._
 
@@ -76,13 +76,12 @@ _Use Admin access to find a feature that parses XML, then force it to read a loc
             <date>2021-09-22</date>
         </root>
         ```
-        
-        .
+
 3.  **Fire:** Send the request via Burp Repeater.
 
 * * *
 
-#### **Phase Four: The Loot**
+## **Phase Four: The Loot**
 
 1.  **Extract:** The server response will contain a long Base64 string inside the `<name>` tag.
 2.  **Decode:**
