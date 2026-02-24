@@ -7,7 +7,7 @@ This is a growing record of adaptability, break-fix mindset and forward-compatib
 ## Inside
 
 - **[Binaries](https://github.com/mermehr/static-binaries)** – Legacy-compatible, rebuilt tools for old systems. If something refused to run on older systems, I'll make it behave.
-  - Moved and maintained in linked repo
+  - ***Moved and maintained in linked repo***
 
 
 - **Reports** – HTB and lab machines. Each entry contains enumeration notes, exploit chains, and privilege escalation steps.
