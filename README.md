@@ -1,8 +1,8 @@
-# RedMind 
+# RedMind Docs
 
-My digital landfill. What’s here is what actually matters to me: working binaries that shouldn’t exist but do, write-ups that reflect real decision-making under pressure, curated playbooks for techniques that I actually want at hand during an engagement, and some curated box reports.
+**Accumulated works while going through HTB Academy and some machines while working to earn the CPTS certification.**
 
-This is a growing record of adaptability, break-fix mindset and forward-compatibility obsession. If something broke because it was built for glibc 2.39 and I only had 2.31, I rebuilt it, documented how, and left a breadcrumb for anyone else stuck in dependency hell.
+Newer more polished developments will be moved to their own respective repo's going forward. I wanted a place that reflects how I operate: direct, adaptable and not allergic to dirty work. I value backwards compatibility, controlled chaos, and having working artifacts I can drop into a target without praying for matching library versions. I also value transparency, if I pivoted through a DMZ box using Ligolo, I want the sequence written exactly how it happened.
 
 ## Inside
 
@@ -18,5 +18,3 @@ This is a growing record of adaptability, break-fix mindset and forward-compatib
 ## Why
 
 I wanted a place that reflects how I operate: direct, adaptable and not allergic to dirty work. I value backwards compatibility, controlled chaos, and having working artifacts I can drop into a target without praying for matching library versions. I also value transparency, if I pivoted through a DMZ box using Ligolo, I want the sequence written exactly how it happened.
-
-If someone stumbles across this repo and finds something useful, great. But it exists first and foremost as my offensive bench, a kit that evolves as I do.
