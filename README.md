@@ -6,7 +6,10 @@ This is a growing record of adaptability, break-fix mindset and forward-compatib
 
 ## Inside
 
-- **Binaries** – Legacy-compatible, rebuilt tools for old systems. If something refused to run on older systems, I'll make it behave.
+- **[Binaries](https://github.com/mermehr/static-binaries)** – Legacy-compatible, rebuilt tools for old systems. If something refused to run on older systems, I'll make it behave.
+  - Moved and maintained in linked repo
+
+
 - **Reports** – HTB and lab machines. Each entry contains enumeration notes, exploit chains, and privilege escalation steps.
 - **Playbooks** – Condensed tactical procedures for things I want muscle memory on (Shadow Creds, ADCS relay, pivot chains, etc). These are just field notes.
 - **Scripts** – Small tools and helpers I wrote myself. Imperfect, but mine. Everything here actually came from problem-solving, and necessity.
