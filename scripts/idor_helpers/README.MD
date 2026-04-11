@@ -1,7 +1,8 @@
+# Idor Iiterator and Downloader
+
 **`downloader_template.py` (GET/POST & Files)**
 
 When you need to iterate through IDs (1-100) and download files, even if the filename is hidden by the server (like `download.php`).
-
 
 - Iterates through a range.
 - Handles both GET and POST.

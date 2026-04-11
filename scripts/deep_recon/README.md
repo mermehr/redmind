@@ -28,7 +28,7 @@ Automated basic recon workflow with optional UDP probing, virtual-host discovery
 
 ## Output layout
 
-```
+```sh
 recon_<target>/
   scans/
     nmap_<target>.txt

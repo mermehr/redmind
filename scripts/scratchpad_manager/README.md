@@ -1,5 +1,7 @@
 # Scratchpad Manager
 
+This evolved into my [Anneses](https://github.com/mermehr/annexes) script.
+
 Simple **bash-based project scratchpad manager** for creating workspaces. Keeps projects organized, tracks the current active workspace with a symlink, and integrates screenshots directly into notes.
 
 ---
@@ -64,7 +66,7 @@ scratchpad <command> [options] [name]
 
 ---
 
-## Examples
+### Examples
 
 ```bash
 # create new project and activate it

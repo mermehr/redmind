@@ -16,17 +16,16 @@ python3 proxy.py [localhost] [localport] [remotehost] [remoteport] [receive_firs
 python3 proxy.py 127.0.0.1 9000 example.com 80 True
 ```
 
--   `localhost`: Local interface to listen on (e.g., `127.0.0.1`)
--   `localport`: Local port to bind (e.g., `9000`)
--   `remotehost`: Remote host to connect to (e.g., `example.com`)
--   `remoteport`: Remote port to connect to (e.g., `80`)
--   `receive_first`: `True` if the remote server sends data immediately upon connection (common with some banners or protocol greetings), else `False`.
+- `localhost`: Local interface to listen on (e.g., `127.0.0.1`)
+- `localport`: Local port to bind (e.g., `9000`)
+- `remotehost`: Remote host to connect to (e.g., `example.com`)
+- `remoteport`: Remote port to connect to (e.g., `80`)
+- `receive_first`: `True` if the remote server sends data immediately upon connection (common with some banners or protocol greetings), else `False`.
 
 ---
 
-#### Reference
+### Reference
 
 These scripts are adapted from exercises in  **Black Hat Python, 2nd Edition** by Justin Seitz & Tim Arnold.  
 
 They have been recreated here for personal study and educational purposes. The original book provides the full context, explanations, and ethical guidance for using these examples responsibly in security research.
-

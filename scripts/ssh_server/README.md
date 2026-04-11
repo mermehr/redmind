@@ -6,7 +6,7 @@ This dir contains a set of Python scripts built using the **Paramiko** library t
 
 ## Scripts Overview
 
-`ssh_cmd.py`
+`ssh-cmd.py`
 
 A simple SSH client that connects to a target server and executes a single command.
 
@@ -16,7 +16,7 @@ A simple SSH client that connects to a target server and executes a single comma
 
 ---
 
-`ssh_rcmd.py`
+`ssh-rcmd.py`
 
 A client-side script that establishes a reverse SSH session to a server.  
 Once connected, it can receive and execute commands issued by the server.
@@ -27,7 +27,7 @@ Once connected, it can receive and execute commands issued by the server.
 
 ---
 
-`ssh_server.py`
+`ssh-server.py`
 
 A custom SSH server that listens for incoming connections and provides an interactive command execution environment.
 
@@ -44,13 +44,13 @@ A custom SSH server that listens for incoming connections and provides an intera
 - [Paramiko](https://www.paramiko.org/)  
 
 Install dependencies:
+
 ```bash
 pip install paramiko
 ```
-
 ---
 
-#### Reference
+### Reference
 
 These scripts are adapted from exercises in  **Black Hat Python, 2nd Edition** by Justin Seitz & Tim Arnold.  
 

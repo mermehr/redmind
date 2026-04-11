@@ -7,7 +7,7 @@
 
 ## Required / recommended tools
 
-**Linux attacker (recommended installs)**
+### Linux attacker (recommended installs)
 
 - `nmap` — host/service scans
 - `enum4linux` — SMB/AD enumeration (legacy but useful)
@@ -18,6 +18,6 @@
 - Impacket (python) — `GetUserSPNs.py`, `secretsdump.py` (optional but very useful)
 - `crackmapexec` (CME) — quick lateral checks (optional)
 
-**Windows host**
+### Windows host
 
 - Optionally add `PowerView.ps1` (place next to `quickhost_fixed.ps1`) to enable extended AD queries.

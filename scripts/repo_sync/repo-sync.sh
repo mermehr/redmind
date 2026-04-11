@@ -110,8 +110,8 @@ sync_repo() {
   popd >/dev/null
 }
 
+# --- Main ---
 
-# MAIN
 echo "============================================================"
 echo "$(timestamp) [INFO] repo-sync started (PID $$)"
 
