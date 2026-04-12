@@ -108,10 +108,10 @@ After extracting the child domain's Administrator hash, a **RaiseChild** attack 
 
 ## Evidence and artifacts
 
-- PAINTERS Root Flag: `ZEPHYR{L34v3_N0_St0n3_Un7urN3d}`
-- PAINTERS Administrator Hash: `4f3d8c09f46360e84463d125c240c554`
-- ZSM Administrator Hash: `84210eddc5724a7801fe78289ee94d44`
-- INTERNAL Administrator Hash: `543beb20a2a579c7714ced68a1760d5e`
+- PAINTERS Root Flag: `ZEPHYR{[REDACTED]}`
+- PAINTERS Administrator Hash: `4f3[REDACTED]554`
+- ZSM Administrator Hash: `8421[REDACTED]d44`
+- INTERNAL Administrator Hash: `543b[REDACTED]0d5e`
 
 ## Reflection
 
