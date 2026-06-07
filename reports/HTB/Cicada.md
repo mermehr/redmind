@@ -1,4 +1,4 @@
-# RedMind Technical Report — Cicada (HTB medium)
+# Cicada (HTB medium)
 **Box:** Cicada · **IP:** 10.10.11.35 · **Domain:** cicada.htb · **OS:** Windows Server (AD)  
 **Date (lab):** 2025-10-25
 

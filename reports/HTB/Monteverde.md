@@ -1,5 +1,5 @@
 
-# RedMind Technical Report — Monteverde (HTB medium)
+# Monteverde (HTB medium)
 **Box:** Monteverde · **IP:** 10.10.10.172 · **Domain:** MEGABANK.LOCAL · **OS:** Windows Server 2019 (17763)  
 **Date (lab):** 2025-10-28
 

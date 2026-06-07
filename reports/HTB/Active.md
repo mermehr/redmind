@@ -1,5 +1,5 @@
 
-# RedMind Technical Report — Active (HTB medium)
+# Active (HTB medium)
 **Box:** Active · **IP:** 10.10.10.100 · **Domain:** active.htb · **OS:** Windows Server (AD)  
 **Date (lab):** 2025-10-23
 

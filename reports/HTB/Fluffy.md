@@ -1,5 +1,5 @@
 
-# RedMind Technical Report — Fluffy (HTB medium)
+# Fluffy (HTB medium)
 **Box:** Fluffy · **IP:** 10.10.11.69 · **Domain:** fluffy.htb · **OS:** Windows Server 2019 (17763)  
 **Date (lab):** 2025-10-12
 
